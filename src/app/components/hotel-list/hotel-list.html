@@ -1,44 +1,62 @@
 <div class="container-fluid px-4 mt-4">
   <!-- Lista de Hoteles -->
   @if (!hotelSeleccionado()) {
-    <!-- Header Premium -->
-    <div class="hotel-hero-section mb-5">
-      <div class="row align-items-center">
-        <div class="col-lg-8">
-          <div class="hero-content">
-            <h1 class="display-4 fw-bold text-white mb-3">🏨 Luxury Hotel Collection</h1>
-            <p class="lead text-white-50 mb-4">Descubre experiencias únicas en nuestros hoteles exclusivos alrededor del mundo</p>
-            <div class="hero-stats">
-              <div class="stat-item">
-                <span class="stat-number">{{ hoteles().length }}</span>
-                <span class="stat-label">Hoteles Premium</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">⭐ 4.8</span>
-                <span class="stat-label">Rating Promedio</span>
-              </div>
-              <div class="stat-item">
-                <span class="stat-number">🌎 12</span>
-                <span class="stat-label">Ciudades</span>
-              </div>
-            </div>
+<!-- Header Hostal Maryed -->
+<div class="hotel-hero-section mb-5">
+  <div class="row align-items-center">
+    <div class="col-lg-8">
+      <div class="hero-content">
+        <!-- Logo MARYED HOSTAL -->
+<div class="hotel-hero-section mb-5">
+  <div class="row align-items-center">
+    <div class="col-lg-8">
+      <div class="hero-content">
+        <!-- Logo como imagen -->
+<div class="logo-container mb-4">
+  <img src="assets/images/logos/logoHotel.png" 
+       alt="Hostal Maryed" 
+       class="hostal-logo-img">
+</div>
+        
+        <p class="lead text-white-50 mb-4">Bienvenido a nuestro hostal, donde la comodidad y el buen servicio nos distinguen</p>
+        <!-- resto del contenido -->
+      </div>
+    </div>
+  </div>
+</div>
+        
+        <p class="lead text-white-50 mb-4">Bienvenido a nuestro hostal, donde la comodidad y el buen servicio nos distinguen</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">{{ hoteles().length }}</span>
+            <span class="stat-label">Sedes Disponibles</span>
           </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="hero-search">
-            <div class="search-box">
-              <i class="fas fa-search search-icon"></i>
-              <input type="text" class="search-input" placeholder="Buscar hotel...">
-            </div>
-            <button class="btn btn-refresh" (click)="recargarHoteles()" [disabled]="loading()">
-              <i class="fas fa-sync-alt" [class.fa-spin]="loading()"></i>
-            </button>
+          <div class="stat-item">
+            <span class="stat-number">⭐ 4.5</span>
+            <span class="stat-label">Rating Promedio</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">🏘️ 2</span>
+            <span class="stat-label">Ubicaciones</span>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-lg-4">
+      <div class="hero-search">
+        <div class="search-box">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" class="search-input" placeholder="Buscar sede...">
+        </div>
+        <button class="btn-refresh" (click)="recargarHoteles()" [disabled]="loading()">
+          <i class="fas fa-sync-alt" [class.fa-spin]="loading()"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
     
-    <!-- Loading State Premium -->
+    <!-- Loading State -->
     @if (loading()) {
       <div class="loading-container text-center py-6">
         <div class="loading-animation">
@@ -46,8 +64,8 @@
             <div class="door"></div>
             <div class="key"></div>
           </div>
-          <h4 class="text-primary mt-4">Cargando experiencias exclusivas...</h4>
-          <p class="text-muted">Preparando los mejores hoteles para ti</p>
+          <h4 class="text-primary mt-4">Cargando sedes...</h4>
+          <p class="text-muted">Preparando la información de las sedes</p>
         </div>
       </div>
     }
@@ -65,13 +83,13 @@
       </div>
     }
 
-    <!-- Grid de Hoteles Premium -->
+    <!-- Grid de Sedes del Hostal -->
     <div class="row g-4">
       @for (hotel of hoteles(); track hotel.idHotel; let i = $index) {
-        <div class="col-xxl-3 col-xl-4 col-lg-6">
+        <div class="col-xxl-6 col-xl-6 col-lg-6">
           <div class="hotel-card-premium" [style.animation-delay]="i * 0.1 + 's'">
             <div class="hotel-card-header">
-              <div class="hotel-badge premium">⭐ Premium</div>
+              <div class="hotel-badge premium">📍 {{ hotel.nombreHotel }}</div>
               <div class="hotel-actions">
                 <button class="btn-favorite">
                   <i class="far fa-heart"></i>
@@ -109,25 +127,25 @@
                 </div>
               </div>
 
-              <!-- Servicios con iconos -->
+              <!-- Servicios del Hostal -->
               <div class="services-section">
-                <h6 class="section-title">Servicios Exclusivos</h6>
+                <h6 class="section-title">Servicios del Hostal</h6>
                 <div class="services-grid">
                   <div class="service-item">
                     <i class="fas fa-wifi service-icon"></i>
-                    <span>Wi-Fi Premium</span>
+                    <span>Wi-Fi Gratis</span>
                   </div>
                   <div class="service-item">
-                    <i class="fas fa-swimming-pool service-icon"></i>
-                    <span>Piscina</span>
+                    <i class="fas fa-utensils service-icon"></i>
+                    <span>Desayuno</span>
                   </div>
                   <div class="service-item">
-                    <i class="fas fa-spa service-icon"></i>
-                    <span>Spa</span>
+                    <i class="fas fa-concierge-bell service-icon"></i>
+                    <span>Recepción 24h</span>
                   </div>
                   <div class="service-item">
-                    <i class="fas fa-dumbbell service-icon"></i>
-                    <span>Gimnasio</span>
+                    <i class="fas fa-parking service-icon"></i>
+                    <span>Estacionamiento</span>
                   </div>
                 </div>
               </div>
@@ -137,7 +155,7 @@
               <button 
                 class="btn-explore"
                 (click)="seleccionarHotel(hotel)">
-                <span>Explorar Habitaciones</span>
+                <span>Ver Habitaciones</span>
                 <i class="fas fa-arrow-right"></i>
               </button>
             </div>
@@ -150,8 +168,8 @@
               <i class="fas fa-hotel"></i>
               <div class="empty-pulse"></div>
             </div>
-            <h3 class="empty-title">No hay hoteles disponibles</h3>
-            <p class="empty-description">Parece que no tenemos hoteles en este momento. Intenta actualizar la búsqueda.</p>
+            <h3 class="empty-title">No hay sedes disponibles</h3>
+            <p class="empty-description">Parece que no tenemos sedes en este momento. Intenta actualizar la búsqueda.</p>
             <button class="btn btn-primary btn-lg mt-3" (click)="recargarHoteles()">
               <i class="fas fa-redo me-2"></i>Reintentar Búsqueda
             </button>
@@ -161,16 +179,16 @@
     </div>
   }
 
-  <!-- Habitaciones del Hotel Seleccionado -->
+  <!-- Habitaciones del Hostal Seleccionado -->
   @if (hotelSeleccionado()) {
-    <!-- Header de Habitaciones Premium -->
+    <!-- Header de Habitaciones -->
     <div class="rooms-hero-section mb-5">
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-md-8">
             <button class="btn-back" (click)="volverALista()">
               <i class="fas fa-arrow-left"></i>
-              <span>Volver a Hoteles</span>
+              <span>Volver a Sedes</span>
             </button>
             <div class="hotel-title-section">
               <h1 class="hotel-main-title">{{ hotelSeleccionado()!.nombreHotel }}</h1>
@@ -231,7 +249,17 @@
       </div>
     }
 
-    <!-- Grid de Habitaciones Premium -->
+    <!-- Filtro por Tipo de Habitación -->
+    <div class="filter-section mb-4">
+      <div class="filter-tabs">
+        <button class="filter-tab active">TODAS</button>
+        <button class="filter-tab">SUITE</button>
+        <button class="filter-tab">MATRI</button>
+        <button class="filter-tab">SIMPLE</button>
+      </div>
+    </div>
+
+    <!-- Grid de Habitaciones -->
     <div class="rooms-grid-container">
       <!-- Habitaciones Disponibles -->
       <div class="rooms-section available-rooms">
@@ -252,7 +280,7 @@
               <div class="room-card-header">
                 <div class="room-number">
                   <span class="room-icon">🏨</span>
-                  <h4>Habitación {{ habitacion.numeroHabitacion }}</h4>
+                  <h4>{{ habitacion.tipoHabitacion }} {{ habitacion.numeroHabitacion }}</h4>
                 </div>
                 <div class="room-status-badge available">
                   <i class="fas fa-check"></i>
@@ -268,11 +296,11 @@
                   </span>
                   <span class="feature-tag">
                     <i class="fas fa-ruler-combined"></i>
-                    35m²
+                    25m²
                   </span>
                   <span class="feature-tag">
                     <i class="fas fa-user-friends"></i>
-                    2 Personas
+                    {{ habitacion.tipoHabitacion === 'SIMPLE' ? '1 Persona' : '2 Personas' }}
                   </span>
                 </div>
                 
@@ -301,7 +329,7 @@
               <div class="room-card-footer">
                 <div class="room-price">
                   <span class="price-currency">$</span>
-                  <span class="price-amount">189</span>
+                  <span class="price-amount">{{ habitacion.tipoHabitacion === 'SUITE' ? '250' : habitacion.tipoHabitacion === 'MATRI' ? '150' : '100' }}</span>
                   <span class="price-period">/noche</span>
                 </div>
                 <div class="room-actions">
@@ -327,13 +355,13 @@
         </div>
       </div>
 
-      <!-- Habitaciones Ocupadas -->
+      <!-- Habitaciones Ocupadas/En Limpieza -->
       <div class="rooms-section occupied-rooms">
         <div class="section-header-premium">
           <div class="section-title-wrapper">
             <i class="fas fa-times-circle section-icon danger"></i>
             <div>
-              <h3 class="section-title">Habitaciones Ocupadas</h3>
+              <h3 class="section-title">Habitaciones No Disponibles</h3>
               <p class="section-subtitle">{{ getHabitacionesOcupadas().length }} habitaciones no disponibles</p>
             </div>
           </div>
@@ -346,11 +374,11 @@
               <div class="room-card-header">
                 <div class="room-number">
                   <span class="room-icon">🚫</span>
-                  <h4>Habitación {{ habitacion.numeroHabitacion }}</h4>
+                  <h4>{{ habitacion.tipoHabitacion }} {{ habitacion.numeroHabitacion }}</h4>
                 </div>
                 <div class="room-status-badge occupied">
                   <i class="fas fa-clock"></i>
-                  Ocupada
+                  {{ habitacion.estado === 'EN LIMPIEZA' ? 'En Limpieza' : 'Ocupada' }}
                 </div>
               </div>
               
@@ -362,39 +390,63 @@
                   </span>
                   <span class="feature-tag">
                     <i class="fas fa-ruler-combined"></i>
-                    35m²
+                    25m²
                   </span>
                   <span class="feature-tag">
                     <i class="fas fa-user-friends"></i>
-                    2 Personas
+                    {{ habitacion.tipoHabitacion === 'SIMPLE' ? '1 Persona' : '2 Personas' }}
                   </span>
                 </div>
                 
                 <p class="room-description">{{ habitacion.descripcionHabitacion }}</p>
                 
-                <div class="occupancy-info">
-                  <div class="occupancy-timeline">
-                    <div class="timeline-item">
-                      <i class="fas fa-sign-in-alt"></i>
-                      <span>Check-in: Hoy</span>
-                    </div>
-                    <div class="timeline-item">
-                      <i class="fas fa-sign-out-alt"></i>
-                      <span>Check-out: 15/12/2024</span>
+                @if (habitacion.estado === 'OCUPADA') {
+                  <div class="occupancy-info">
+                    <div class="occupancy-timeline">
+                      <div class="timeline-item">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Check-in: Hoy</span>
+                      </div>
+                      <div class="timeline-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Check-out: 15/12/2024</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                } @else {
+                  <div class="cleaning-info">
+                    <div class="cleaning-status">
+                      <i class="fas fa-broom"></i>
+                      <span>En proceso de limpieza</span>
+                    </div>
+                    <div class="cleaning-time">
+                      <i class="fas fa-clock"></i>
+                      <span>Disponible en aproximadamente 2 horas</span>
+                    </div>
+                  </div>
+                }
               </div>
               
               <div class="room-card-footer">
-                <div class="occupied-message">
-                  <i class="fas fa-info-circle"></i>
-                  Disponible en 3 días
-                </div>
-                <button class="btn-notify">
-                  <i class="fas fa-bell"></i>
-                  Notificar
-                </button>
+                @if (habitacion.estado === 'OCUPADA') {
+                  <div class="occupied-message">
+                    <i class="fas fa-info-circle"></i>
+                    Disponible en 3 días
+                  </div>
+                  <button class="btn-notify">
+                    <i class="fas fa-bell"></i>
+                    Notificar
+                  </button>
+                } @else {
+                  <div class="cleaning-message">
+                    <i class="fas fa-info-circle"></i>
+                    Disponible pronto
+                  </div>
+                  <button class="btn-notify">
+                    <i class="fas fa-broom"></i>
+                    Limpieza
+                  </button>
+                }
               </div>
             </div>
           } @empty {
@@ -411,842 +463,3 @@
     </div>
   }
 </div>
-
-<!-- Estilos CSS Premium -->
-<style>
-  :host {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-    --shadow-premium: 0 20px 40px rgba(0,0,0,0.1);
-    --shadow-hover: 0 30px 60px rgba(0,0,0,0.15);
-  }
-
-  .container-fluid {
-    max-width: 1400px;
-  }
-
-  /* Hero Section */
-  .hotel-hero-section {
-    background: var(--dark-gradient);
-    padding: 4rem 2rem;
-    border-radius: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hotel-hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-  }
-
-  .hero-content h1 {
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  }
-
-  .hero-stats {
-    display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-
-  .stat-item {
-    text-align: center;
-  }
-
-  .stat-number {
-    display: block;
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-  }
-
-  .stat-label {
-    font-size: 0.875rem;
-    color: rgba(255,255,255,0.8);
-  }
-
-  .hero-search {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-
-  .search-box {
-    position: relative;
-    flex: 1;
-  }
-
-  .search-input {
-    width: 100%;
-    padding: 1rem 1rem 1rem 3rem;
-    border: none;
-    border-radius: 50px;
-    background: rgba(255,255,255,0.9);
-    font-size: 1rem;
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #666;
-  }
-
-  .btn-refresh {
-    background: rgba(255,255,255,0.2);
-    border: 2px solid rgba(255,255,255,0.3);
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-
-  .btn-refresh:hover {
-    background: rgba(255,255,255,0.3);
-    transform: rotate(180deg);
-  }
-
-  /* Hotel Cards Premium */
-  .hotel-card-premium {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: var(--shadow-premium);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    animation: slideUp 0.6s ease forwards;
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  @keyframes slideUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hotel-card-premium:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-hover);
-  }
-
-  .hotel-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-  }
-
-  .hotel-badge {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-  }
-
-  .hotel-badge.premium {
-    background: linear-gradient(135deg, #ffd700, #ffed4e);
-    color: #8b6b00;
-  }
-
-  .btn-favorite {
-    background: none;
-    border: none;
-    color: #ccc;
-    font-size: 1.25rem;
-    transition: color 0.3s ease;
-  }
-
-  .btn-favorite:hover {
-    color: #ff4757;
-  }
-
-  .hotel-avatar {
-    width: 80px;
-    height: 80px;
-    background: var(--primary-gradient);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-
-  .hotel-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
-  }
-
-  .hotel-info-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .info-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .icon-primary {
-    color: #3498db;
-    font-size: 1.25rem;
-    width: 24px;
-    text-align: center;
-  }
-
-  .info-content {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .info-label {
-    font-size: 0.75rem;
-    color: #7f8c8d;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  .info-value {
-    font-size: 0.9rem;
-    color: #2c3e50;
-    font-weight: 500;
-  }
-
-  .services-section {
-    margin-bottom: 2rem;
-  }
-
-  .section-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-  }
-
-  .service-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: #34495e;
-  }
-
-  .service-icon {
-    color: #3498db;
-    font-size: 0.9rem;
-  }
-
-  .btn-explore {
-    width: 100%;
-    background: var(--primary-gradient);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-  }
-
-  .btn-explore:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
-  }
-
-  /* Rooms Hero Section */
-  .rooms-hero-section {
-    background: white;
-    padding: 2rem 0;
-    border-bottom: 1px solid #ecf0f1;
-  }
-
-  .btn-back {
-    background: none;
-    border: 2px solid #3498db;
-    color: #3498db;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin-bottom: 1.5rem;
-  }
-
-  .btn-back:hover {
-    background: #3498db;
-    color: white;
-  }
-
-  .hotel-main-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-  }
-
-  .hotel-subtitle {
-    font-size: 1.1rem;
-    color: #7f8c8d;
-  }
-
-  .rooms-stats-premium {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-  }
-
-  .stat-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow-premium);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    min-width: 150px;
-  }
-
-  .stat-card.available {
-    border-left: 4px solid #27ae60;
-  }
-
-  .stat-card.occupied {
-    border-left: 4px solid #e74c3c;
-  }
-
-  .stat-icon {
-    font-size: 2rem;
-  }
-
-  .stat-card.available .stat-icon {
-    color: #27ae60;
-  }
-
-  .stat-card.occupied .stat-icon {
-    color: #e74c3c;
-  }
-
-  .stat-number {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #2c3e50;
-  }
-
-  .stat-label {
-    font-size: 0.8rem;
-    color: #7f8c8d;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  /* Rooms Grid */
-  .rooms-grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-
-  .rooms-section {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: var(--shadow-premium);
-  }
-
-  .section-header-premium {
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ecf0f1;
-  }
-
-  .section-title-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .section-icon {
-    font-size: 2rem;
-  }
-
-  .section-icon.success {
-    color: #27ae60;
-  }
-
-  .section-icon.danger {
-    color: #e74c3c;
-  }
-
-  .section-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 0.25rem;
-  }
-
-  .section-subtitle {
-    color: #7f8c8d;
-    margin: 0;
-  }
-
-  .section-badge {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: bold;
-    color: white;
-  }
-
-  .section-badge.success {
-    background: #27ae60;
-  }
-
-  .section-badge.danger {
-    background: #e74c3c;
-  }
-
-  .rooms-scroll-container {
-    padding: 2rem;
-    max-height: 600px;
-    overflow-y: auto;
-  }
-
-  /* Room Cards Premium */
-  .room-card-premium {
-    background: white;
-    border-radius: 15px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    border-left: 4px solid;
-    animation: slideUp 0.6s ease forwards;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  .room-card-premium.available {
-    border-left-color: #27ae60;
-  }
-
-  .room-card-premium.occupied {
-    border-left-color: #e74c3c;
-  }
-
-  .room-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-
-  .room-number {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .room-icon {
-    font-size: 1.5rem;
-  }
-
-  .room-number h4 {
-    margin: 0;
-    color: #2c3e50;
-  }
-
-  .room-status-badge {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .room-status-badge.available {
-    background: #d5f4e6;
-    color: #27ae60;
-  }
-
-  .room-status-badge.occupied {
-    background: #fdeaea;
-    color: #e74c3c;
-  }
-
-  .room-features {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .feature-tag {
-    background: #f8f9fa;
-    padding: 0.375rem 0.75rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    color: #495057;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-
-  .room-description {
-    color: #6c757d;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-  }
-
-  .room-amenities {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .amenity {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 0.8rem;
-    color: #6c757d;
-  }
-
-  .amenity i {
-    font-size: 1.25rem;
-    color: #3498db;
-  }
-
-  .occupancy-info {
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-  }
-
-  .occupancy-timeline {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .timeline-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    color: #495057;
-  }
-
-  .room-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .room-price {
-    display: flex;
-    align-items: baseline;
-    gap: 0.25rem;
-  }
-
-  .price-currency {
-    font-size: 1rem;
-    color: #27ae60;
-    font-weight: 600;
-  }
-
-  .price-amount {
-    font-size: 1.5rem;
-    color: #27ae60;
-    font-weight: bold;
-  }
-
-  .price-period {
-    font-size: 0.9rem;
-    color: #6c757d;
-  }
-
-  .room-actions {
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  .btn-reserve {
-    background: #27ae60;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 25px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-  }
-
-  .btn-reserve:hover {
-    background: #219653;
-    transform: translateY(-2px);
-  }
-
-  .btn-details {
-    background: #3498db;
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-
-  .btn-details:hover {
-    background: #2980b9;
-    transform: scale(1.1);
-  }
-
-  .occupied-message {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #e74c3c;
-    font-weight: 500;
-  }
-
-  .btn-notify {
-    background: #f39c12;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 25px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-  }
-
-  .btn-notify:hover {
-    background: #e67e22;
-    transform: translateY(-2px);
-  }
-
-  /* Empty States */
-  .empty-state-premium {
-    padding: 4rem 2rem;
-  }
-
-  .empty-illustration {
-    position: relative;
-    margin-bottom: 2rem;
-  }
-
-  .empty-illustration i {
-    font-size: 4rem;
-    color: #bdc3c7;
-  }
-
-  .empty-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
-    border: 2px solid #bdc3c7;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0% {
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 1;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(1.2);
-      opacity: 0;
-    }
-  }
-
-  .empty-title {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-  }
-
-  .empty-description {
-    color: #7f8c8d;
-    font-size: 1.1rem;
-  }
-
-  .empty-rooms-state {
-    text-align: center;
-    padding: 3rem 2rem;
-    color: #7f8c8d;
-  }
-
-  .empty-rooms-illustration i {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  /* Loading Animations */
-  .loading-container, .loading-rooms {
-    padding: 4rem 2rem;
-  }
-
-  .hotel-loader, .room-loader {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-  }
-
-  .door, .room-door {
-    width: 50px;
-    height: 80px;
-    background: #3498db;
-    border-radius: 5px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: doorOpen 2s infinite;
-  }
-
-  .key, .room-key {
-    width: 20px;
-    height: 40px;
-    background: #f39c12;
-    border-radius: 10px;
-    position: absolute;
-    top: 30%;
-    right: 30%;
-    animation: keyFloat 2s infinite;
-  }
-
-  @keyframes doorOpen {
-    0%, 100% { transform: translate(-50%, -50%) rotateY(0deg); }
-    50% { transform: translate(-50%, -50%) rotateY(-30deg); }
-  }
-
-  @keyframes keyFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  /* Error Banner */
-  .error-banner {
-    border-radius: 15px;
-    border: none;
-    box-shadow: var(--shadow-premium);
-  }
-
-  /* Responsive Design */
-  @media (max-width: 1200px) {
-    .rooms-grid-container {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-    
-    .hero-stats {
-      flex-direction: column;
-      gap: 1rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .hotel-hero-section {
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-    
-    .hero-search {
-      flex-direction: column;
-    }
-    
-    .rooms-stats-premium {
-      justify-content: center;
-      margin-top: 1rem;
-    }
-    
-    .stat-card {
-      min-width: 120px;
-    }
-    
-    .room-card-header {
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
-    }
-    
-    .room-card-footer {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .room-actions {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-
-  /* Scrollbar Styling */
-  .rooms-scroll-container::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .rooms-scroll-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-  }
-
-  .rooms-scroll-container::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
-  }
-
-  .rooms-scroll-container::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
-  }
-</style>
