@@ -883,7 +883,7 @@
 .hostal-logo-img {
   max-width: 350px;
   height: auto;
-  display: block; /* Asegura que se muestre como bloque */
+  display: block;
 }
 
 .logo-container {

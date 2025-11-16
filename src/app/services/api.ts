@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -25,7 +25,7 @@ export interface Habitacion {
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:8080'; // Tu backend Spring Boot
+  private apiUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -34,8 +34,15 @@ export class ApiService {
     return this.http.get<Hotel[]>(`${this.apiUrl}/hotel/hoteles`);
   }
 
-  // Obtener habitaciones por hotel
-  getHabitacionesPorHotel(idHotel: number): Observable<Habitacion[]> {
-    return this.http.get<Habitacion[]>(`${this.apiUrl}/habitacion/listar?idHotel=${idHotel}`);
+getHabitacionesPorHotel(idHotel: number): Observable<Habitacion[]> {
+  const headers = new HttpHeaders({
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.get<Habitacion[]>(
+    `${this.apiUrl}/habitacion/habitaciones/${idHotel}`,
+    { headers }
+  );
   }
 }

@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api';
+import { RouterModule } from '@angular/router';
 
 interface Hotel {
   idHotel: number;
@@ -10,20 +11,12 @@ interface Hotel {
   email: string;
 }
 
-interface Habitacion {
-  idHabitacion: number;
-  idHotel: number;
-  numeroHabitacion: string;
-  tipoHabitacion: string;
-  descripcionHabitacion: string;
-  estado: string;
-  tiempoReservado?: string;
-}
+
 
 @Component({
   selector: 'app-hotel-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule], 
   templateUrl: './hotel-list.html',
   styleUrl: './hotel-list.css'
 })
@@ -31,7 +24,7 @@ export class HotelListComponent {
   private apiService = inject(ApiService);
   
   hoteles = signal<Hotel[]>([]);
-  habitaciones = signal<Habitacion[]>([]);
+  habitaciones = signal<any[]>([]);
   hotelSeleccionado = signal<Hotel | null>(null);
   loading = signal(false);
   error = signal<string | null>(null);
@@ -57,7 +50,6 @@ export class HotelListComponent {
     }
   }
 
-  // ✅ FUNCIÓN RECARGAR HOTELES IMPLEMENTADA
   async recargarHoteles(): Promise<void> {
     console.log('🔄 Recargando lista de hoteles...');
     await this.cargarHoteles();
@@ -87,26 +79,4 @@ export class HotelListComponent {
     this.error.set(null);
   }
 
-  // Métodos auxiliares para filtrar habitaciones
-  getHabitacionesDisponibles(): Habitacion[] {
-    return this.habitaciones().filter(h => 
-      h.estado.toLowerCase() === 'disponible' || h.estado === 'Disponible'
-    );
-  }
-
-  getHabitacionesOcupadas(): Habitacion[] {
-    return this.habitaciones().filter(h => 
-      h.estado.toLowerCase() === 'ocupada' || h.estado === 'Ocupada'
-    );
-  }
-
-  // Método adicional para contar habitaciones por estado
-  getTotalHabitaciones(): number {
-    return this.habitaciones().length;
-  }
-
-  // Método para formatear el tiempo reservado (si existe)
-  getTiempoReservado(habitacion: Habitacion): string {
-    return habitacion.tiempoReservado || 'No especificado';
-  }
 }
