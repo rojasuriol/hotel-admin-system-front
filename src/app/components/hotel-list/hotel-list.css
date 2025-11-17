@@ -710,3 +710,22 @@
     }
   }
 }
+
+/* CONTENEDOR DEL BANNER */
+.hoteles-banner {
+  width: 100%;
+  height: 1000px;
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+/* IMAGEN */
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.70);
+  transition: transform .6s ease;
+}
