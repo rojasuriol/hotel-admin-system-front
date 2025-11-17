@@ -39,33 +39,45 @@ export class HabitacionListComponent implements OnInit {
         this.cargarHabitaciones(idHotel);
       }
     });
+
+    this.route.queryParams.subscribe(queryParams => {
+      const nombreHotel = queryParams['nombre'];
+      if (nombreHotel) {
+        this.hotelNombre.set(nombreHotel);
+      } else {
+        const idHotel = this.hotelId();
+        if (idHotel) {
+          this.hotelNombre.set(`Hotel ${idHotel}`);
+        }
+      }
+    });
   }
 
-async cargarHabitaciones(idHotel: number): Promise<void> {
-  console.log('🔍 ID Hotel:', idHotel);
-  console.log('🔗 URL que se intentará:', `http://localhost:8080/habitaciones/${idHotel}`);
-  
-  this.loading.set(true);
-  this.error.set(null);
-  try {
-    const data = await this.apiService.getHabitacionesPorHotel(idHotel).toPromise();
-    console.log('✅ Datos recibidos:', data);
-    console.log('📊 Cantidad de habitaciones:', data?.length);
-    
-    this.habitaciones.set(data || []);
-    if (data?.length === 0) {
-      this.error.set('No se encontraron habitaciones para este hotel');
+  async cargarHabitaciones(idHotel: number): Promise<void> {
+    console.log('🔍 ID Hotel:', idHotel);
+    console.log('🔗 URL que se intentará:', `http://localhost:8080/habitaciones/${idHotel}`);
+
+    this.loading.set(true);
+    this.error.set(null);
+    try {
+      const data = await this.apiService.getHabitacionesPorHotel(idHotel).toPromise();
+      console.log('✅ Datos recibidos:', data);
+      console.log('📊 Cantidad de habitaciones:', data?.length);
+
+      this.habitaciones.set(data || []);
+      if (data?.length === 0) {
+        this.error.set('No se encontraron habitaciones para este hotel');
+      }
+
+    } catch (error: any) {
+      console.error('❌ Error completo:', error);
+      console.error('❌ Status:', error?.status);
+      console.error('❌ Mensaje:', error?.message);
+      this.error.set('Error al cargar las habitaciones: ' + (error?.message || 'Desconocido'));
+    } finally {
+      this.loading.set(false);
     }
-    this.hotelNombre.set(`Hotel ${idHotel}`);
-  } catch (error: any) {
-    console.error('❌ Error completo:', error);
-    console.error('❌ Status:', error?.status);
-    console.error('❌ Mensaje:', error?.message);
-    this.error.set('Error al cargar las habitaciones: ' + (error?.message || 'Desconocido'));
-  } finally {
-    this.loading.set(false);
   }
-}
 
   volverAHoteles(): void {
     this.router.navigate(['/hoteles']);
@@ -91,5 +103,4 @@ async cargarHabitaciones(idHotel: number): Promise<void> {
   getTiempoReservado(habitacion: Habitacion): string {
     return habitacion.tiempoReservado || 'No especificado';
   }
-  
 }

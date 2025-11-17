@@ -34,15 +34,17 @@ export class ApiService {
     return this.http.get<Hotel[]>(`${this.apiUrl}/hotel/hoteles`);
   }
 
-getHabitacionesPorHotel(idHotel: number): Observable<Habitacion[]> {
-  const headers = new HttpHeaders({
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  });
 
-  return this.http.get<Habitacion[]>(
-    `${this.apiUrl}/habitacion/habitaciones/${idHotel}`,
-    { headers }
-  );
+
+
+  getHabitacionesPorHotel(idHotel: number): Observable<Habitacion[]> {
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    });
+    return this.http.get<Habitacion[]>(
+      `${this.apiUrl}/habitacion/habitaciones/${idHotel}`,
+      { headers }
+    );
   }
 }

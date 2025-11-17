@@ -1,50 +1,44 @@
-<div class="container-fluid px-4 mt-4">
+<div class="container-fluid p-0 m-0">
   <!-- Lista de Hoteles -->
   @if (!hotelSeleccionado()) {
+
   <!-- Header Hostal Maryed -->
   <div class="hotel-hero-section mb-5">
     <div class="row align-items-center">
       <div class="col-lg-8">
         <div class="hero-content">
-          <!-- Logo MARYED HOSTAL -->
-          <div class="hotel-hero-section mb-5">
-            <div class="row align-items-center">
-              <div class="col-lg-8">
-                <div class="hero-content">
-                  <!-- Logo como imagen -->
-                  <div class="logo-container mb-4">
-                    <img src="assets/images/logos/logoMaryedHotel.png" alt="Hostal Maryed" class="hostal-logo-img">
-                  </div>
-                  <!-- resto del contenido -->
-                </div>
-              </div>
-            </div>
+
+          <!-- Logo -->
+          <div class="logo-container mb-4">
+            <img src="assets/images/logos/logoMaryedHotel.png" alt="Hostal Maryed" class="hostal-logo-img logo-redondo">
           </div>
 
-          <p class="lead text-white-50 mb-4">Bienvenido a nuestro hostal, donde la comodidad y el buen servicio nos
-            distinguen</p>
+
+          <p class="lead text-white-50 mb-4 texto-grande">
+            Bienvenido a nuestro hostal, donde la comodidad y el buen servicio nos distinguen
+          </p>
+
+
+
+          <!-- Stats NEÓN -->
           <div class="hero-stats">
             <div class="stat-item">
               <span class="stat-number">{{ hoteles().length }}</span>
               <span class="stat-label">Sedes Disponibles</span>
             </div>
-            <div class="stat-item">
-              <span class="stat-number">⭐ 4.5</span>
-              <span class="stat-label">Rating Promedio</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">🏘️ 2</span>
-              <span class="stat-label">Ubicaciones</span>
-            </div>
           </div>
+
         </div>
       </div>
+
+      <!-- Buscador -->
       <div class="col-lg-4">
         <div class="hero-search">
           <div class="search-box">
             <i class="fas fa-search search-icon"></i>
             <input type="text" class="search-input" placeholder="Buscar sede...">
           </div>
+
           <button class="btn-refresh" (click)="recargarHoteles()" [disabled]="loading()">
             <i class="fas fa-sync-alt" [class.fa-spin]="loading()"></i>
           </button>
@@ -53,7 +47,7 @@
     </div>
   </div>
 
-  <!-- Loading State -->
+  <!-- Estado de carga -->
   @if (loading()) {
   <div class="loading-container text-center py-6">
     <div class="loading-animation">
@@ -67,6 +61,7 @@
   </div>
   }
 
+  <!-- Error -->
   @if (error()) {
   <div class="error-banner alert alert-warning alert-dismissible fade show" role="alert">
     <div class="d-flex align-items-center">
@@ -80,13 +75,19 @@
   </div>
   }
 
-  <!-- Grid de Sedes del Hostal -->
+  <!-- GRID DE SEDES -->
   <div class="row g-4">
+
     @for (hotel of hoteles(); track hotel.idHotel; let i = $index) {
     <div class="col-xxl-6 col-xl-6 col-lg-6">
+
+      <!-- CARD DEL HOTEL CON ESTILO NEÓN -->
       <div class="hotel-card-premium" [style.animation-delay]="i * 0.1 + 's'">
+
+        <!-- Encabezado -->
         <div class="hotel-card-header">
           <div class="hotel-badge premium">📍 {{ hotel.nombreHotel }}</div>
+
           <div class="hotel-actions">
             <button class="btn-favorite">
               <i class="far fa-heart"></i>
@@ -94,13 +95,20 @@
           </div>
         </div>
 
+        <!-- Cuerpo -->
         <div class="hotel-card-body">
+
+          <!-- Avatar -->
           <div class="hotel-avatar">
             {{ hotel.nombreHotel.charAt(0) }}
           </div>
+
+          <!-- Nombre -->
           <h3 class="hotel-name">{{ hotel.nombreHotel }}</h3>
 
+          <!-- Info general -->
           <div class="hotel-info-grid">
+
             <div class="info-item">
               <i class="fas fa-map-marker-alt icon-primary"></i>
               <div class="info-content">
@@ -108,6 +116,7 @@
                 <span class="info-value">{{ hotel.direccion }}</span>
               </div>
             </div>
+
             <div class="info-item">
               <i class="fas fa-phone icon-primary"></i>
               <div class="info-content">
@@ -115,6 +124,7 @@
                 <span class="info-value">{{ hotel.telefono }}</span>
               </div>
             </div>
+
             <div class="info-item">
               <i class="fas fa-envelope icon-primary"></i>
               <div class="info-content">
@@ -124,39 +134,42 @@
             </div>
           </div>
 
-          <!-- Servicios del Hostal -->
+          <!-- Servicios -->
           <div class="services-section">
             <h6 class="section-title">Servicios del Hostal</h6>
+
             <div class="services-grid">
               <div class="service-item">
-                <i class="fas fa-wifi service-icon"></i>
-                <span>Wi-Fi Gratis</span>
+                <i class="fas fa-wifi service-icon"></i><span>Wi-Fi Gratis</span>
               </div>
               <div class="service-item">
-                <i class="fas fa-utensils service-icon"></i>
-                <span>Desayuno</span>
+                <i class="fas fa-utensils service-icon"></i><span>Desayuno</span>
               </div>
               <div class="service-item">
-                <i class="fas fa-concierge-bell service-icon"></i>
-                <span>Recepción 24h</span>
+                <i class="fas fa-concierge-bell service-icon"></i><span>Recepción 24h</span>
               </div>
               <div class="service-item">
-                <i class="fas fa-parking service-icon"></i>
-                <span>Estacionamiento</span>
+                <i class="fas fa-parking service-icon"></i><span>Estacionamiento</span>
               </div>
             </div>
           </div>
+
         </div>
 
-<div class="hotel-card-footer">
-<button class="btn-explore" [routerLink]="['/habitaciones', hotel.idHotel]">
-  <span>Ver Habitaciones</span>
-  <i class="fas fa-arrow-right"></i>
-</button>
-</div>
+        <!-- Footer -->
+        <div class="hotel-card-footer">
+          <button class="btn-explore" [routerLink]="['/habitaciones', hotel.idHotel]"
+            [queryParams]="{nombre: hotel.nombreHotel}">
+            <span>Ver Habitaciones</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
       </div>
     </div>
-    } @empty {
+    }
+
+    @empty {
     <div class="col-12">
       <div class="empty-state-premium text-center py-6">
         <div class="empty-illustration">
@@ -164,14 +177,16 @@
           <div class="empty-pulse"></div>
         </div>
         <h3 class="empty-title">No hay sedes disponibles</h3>
-        <p class="empty-description">Parece que no tenemos sedes en este momento. Intenta actualizar la búsqueda.</p>
+        <p class="empty-description">
+          Parece que no tenemos sedes en este momento. Intenta actualizar la búsqueda.
+        </p>
         <button class="btn btn-primary btn-lg mt-3" (click)="recargarHoteles()">
           <i class="fas fa-redo me-2"></i>Reintentar Búsqueda
         </button>
       </div>
     </div>
     }
+
   </div>
-  
   }
 </div>

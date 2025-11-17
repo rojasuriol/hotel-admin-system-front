@@ -35,7 +35,7 @@ export class LoginComponent {
   showPassword = signal(false);
   rememberMe = signal(false);
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   async onSubmit(): Promise<void> {
     this.error.set(null);
